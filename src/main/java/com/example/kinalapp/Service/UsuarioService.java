@@ -66,8 +66,7 @@ public class UsuarioService implements IUsuarioService{
 
     private void validarUsuario(Usuario usuario){
         if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().trim().isEmpty()){
-            throw new IllegalArgumentException(("El Código de usuario es un dato obligatorio")
-            );
+            throw new IllegalArgumentException(("El Código de usuario es un dato obligatorio"));
         }
 
         if (usuario.getUserName() == null || usuario.getUserName().trim().isEmpty()){
