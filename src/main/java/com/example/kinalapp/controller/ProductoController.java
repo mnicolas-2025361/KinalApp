@@ -71,4 +71,5 @@ public class ProductoController {
     public ResponseEntity<List<Producto>> productosActivos(){
         return ResponseEntity.ok(productoService.listarProductosActivos());
     }
+
 }
