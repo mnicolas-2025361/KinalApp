@@ -13,7 +13,7 @@ public class Producto {
 
     @Id
     @Column(name = "codigo_producto")
-    private int codigoProducto;
+    private long codigoProducto;
 
     @Column
     private String nombreProducto;
@@ -22,15 +22,15 @@ public class Producto {
     private BigDecimal precio;
 
     @Column
-    private int stock;
+    private long stock;
 
     @Column
-    private int estado;
+    private long estado;
 
     public Producto() {
     }
 
-    public Producto(int codigoProducto, String nombreProducto, BigDecimal precio, int stock, int estado) {
+    public Producto(long codigoProducto, String nombreProducto, BigDecimal precio, long stock, long estado) {
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.precio = precio;
@@ -38,11 +38,11 @@ public class Producto {
         this.estado = estado;
     }
 
-    public int getCodigoProducto() {
+    public long getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(int codigoProducto) {
+    public void setCodigoProducto(long codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
@@ -62,19 +62,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public long getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(long stock) {
         this.stock = stock;
     }
 
-    public int getEstado() {
+    public long getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(long estado) {
         this.estado = estado;
     }
 }

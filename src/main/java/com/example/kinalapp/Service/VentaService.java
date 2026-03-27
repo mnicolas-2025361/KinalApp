@@ -5,6 +5,7 @@ import com.example.kinalapp.repositry.VentaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +35,8 @@ public class VentaService implements IVentaService{
         //Validar datos antes de guardar
         validarVenta(venta);
 
-        //Si el estado es null o 0, se activa por defecto
-        if (venta.getEstado() == null || venta.getEstado() == 0){
+        //Si el estado es 0, se activa por defecto
+        if (venta.getEstado() == 0){
             venta.setEstado(1);
         }
 
@@ -44,12 +45,12 @@ public class VentaService implements IVentaService{
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Venta> buscarPorCodigoVenta(int codigoVenta){
+    public Optional<Venta> buscarPorCodigoVenta(Long codigoVenta){
         return ventaRepository.findById(codigoVenta);
     }
 
     @Override
-    public Venta actualizar(int codigoVenta, Venta venta){
+    public Venta actualizar(Long codigoVenta, Venta venta){
         //Verificar si existe
         Venta ventaExistente = ventaRepository.findById(codigoVenta)
                 .orElseThrow(() -> new IllegalArgumentException("La venta no se encontró por el código: " + codigoVenta));
@@ -64,7 +65,7 @@ public class VentaService implements IVentaService{
     }
 
     @Override
-    public void eliminar(int codigoVenta){
+    public void eliminar(Long codigoVenta){
         if (!ventaRepository.existsById(codigoVenta)){
             throw new IllegalArgumentException("La venta no se encontró por el código: " + codigoVenta);
         }
@@ -73,7 +74,7 @@ public class VentaService implements IVentaService{
 
     @Override
     @Transactional(readOnly = true)
-    public boolean existePorCodigoVenta(int codigoVenta) {
+    public boolean existePorCodigoVenta(Long codigoVenta) {
         return ventaRepository.existsById(codigoVenta);
     }
 
@@ -84,8 +85,8 @@ public class VentaService implements IVentaService{
             throw new IllegalArgumentException("La fecha de la venta es obligatoria");
         }
 
-        if (venta.getTotal() == null){
-            throw new IllegalArgumentException("El total de la venta es obligatorio");
+        if (venta.getTotal() == null || venta.getTotal().compareTo(BigDecimal.ZERO) <= 0){
+            throw new IllegalArgumentException("El total debe ser mayor a 0");
         }
     }
 }
