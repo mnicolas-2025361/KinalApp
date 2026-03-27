@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DetalleVentaRepository extends JpaRepository <DetalleVenta, String> {
 
-    List<DetalleVenta> findByEstado(int estado);
+    List<com.example.kinalapp.entity.DetalleVenta> findByEstado(int estado);
 }
