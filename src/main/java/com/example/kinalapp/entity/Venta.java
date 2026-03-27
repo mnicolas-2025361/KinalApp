@@ -13,7 +13,7 @@ import java.util.Date;
 public class Venta {
     @Id
     @Column
-    private int codigoVenta;
+    private Long codigoVenta;
     @Column
     private Date fechaVenta;
     @Column
@@ -24,18 +24,18 @@ public class Venta {
     public Venta(){
     }
 
-    public Venta(int codigoVenta, int estado, BigDecimal total, Date fechaVenta) {
+    public Venta(Long codigoVenta, int estado, BigDecimal total, Date fechaVenta) {
         this.codigoVenta = codigoVenta;
         this.estado = estado;
         this.total = total;
         this.fechaVenta = fechaVenta;
     }
 
-    public int getCodigoVenta() {
+    public Long getCodigoVenta() {
         return codigoVenta;
     }
 
-    public void setCodigoVenta(int codigoVenta) {
+    public void setCodigoVenta(Long codigoVenta) {
         this.codigoVenta = codigoVenta;
     }
 

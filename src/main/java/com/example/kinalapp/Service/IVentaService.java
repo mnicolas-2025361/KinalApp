@@ -19,5 +19,5 @@ public interface IVentaService {
     void eliminar(int codigoVenta);
 
     boolean existePorCodigoVenta(int codigoVenta);
-    
+
 }
