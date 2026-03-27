@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UsuarioRepository  extends JpaRepository <Usuario, String> {
 
-    List<Usuario> findByEstado(int estado);
+    List<Usuario> findByEstado(long estado);
 }
