@@ -19,12 +19,12 @@ public class Venta {
     @Column
     private BigDecimal total;
     @Column
-    private int estado;
+    private long estado;
 
     public Venta(){
     }
 
-    public Venta(Long codigoVenta, int estado, BigDecimal total, Date fechaVenta) {
+    public Venta(Long codigoVenta, long estado, BigDecimal total, Date fechaVenta) {
         this.codigoVenta = codigoVenta;
         this.estado = estado;
         this.total = total;
@@ -39,11 +39,11 @@ public class Venta {
         this.codigoVenta = codigoVenta;
     }
 
-    public int getEstado() {
+    public long getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(long estado) {
         this.estado = estado;
     }
 
