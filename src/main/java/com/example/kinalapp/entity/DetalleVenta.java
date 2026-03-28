@@ -8,10 +8,10 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(name = "detalle_venta")
 public class DetalleVenta {
     @Id
-    @Column (name = "codigo_Detalle_Venta")
+    @Column(name = "codigo_Detalle_Venta")
     private String codigoDetalleVenta;
     @Column
     private long cantidad;
@@ -20,14 +20,14 @@ public class DetalleVenta {
     @Column
     private BigDecimal subtotal;
 
-    public DetalleVenta(){
+    public DetalleVenta() {
     }
 
-    public DetalleVenta(BigDecimal subtotal, BigDecimal precioUnitario, long cantidad, String codigoDetalleVenta) {
-        this.subtotal = subtotal;
-        this.precioUnitario = precioUnitario;
-        this.cantidad = cantidad;
+    public DetalleVenta(String codigoDetalleVenta, long cantidad, BigDecimal precioUnitario, BigDecimal subtotal) {
         this.codigoDetalleVenta = codigoDetalleVenta;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.subtotal = subtotal;
     }
 
     public String getCodigoDetalleVenta() {
@@ -38,12 +38,12 @@ public class DetalleVenta {
         this.codigoDetalleVenta = codigoDetalleVenta;
     }
 
-    public BigDecimal getSubtotal() {
-        return subtotal;
+    public long getCantidad() {
+        return cantidad;
     }
 
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+    public void setCantidad(long cantidad) {
+        this.cantidad = cantidad;
     }
 
     public BigDecimal getPrecioUnitario() {
@@ -54,11 +54,11 @@ public class DetalleVenta {
         this.precioUnitario = precioUnitario;
     }
 
-    public long getCantidad() {
-        return cantidad;
+    public BigDecimal getSubtotal() {
+        return subtotal;
     }
 
-    public void setCantidad(long cantidad) {
-        this.cantidad = cantidad;
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 }
