@@ -45,7 +45,7 @@ public class ProductoController {
     // 🔹 Eliminar
     @DeleteMapping("/{codigoProducto}")
     public ResponseEntity<Void> eliminar(@PathVariable int codigoProducto){
-        if(!productoService.exitePorCodigoProducto(codigoProducto)){
+        if(productoService.exitePorCodigoProducto(codigoProducto)){
             return ResponseEntity.notFound().build();
         }
         productoService.eliminar(codigoProducto);
@@ -56,7 +56,7 @@ public class ProductoController {
     @PutMapping("/{codigoProducto}")
     public ResponseEntity<?> actualizar(@PathVariable int codigoProducto, @RequestBody Producto producto){
         try {
-            if(!productoService.exitePorCodigoProducto(codigoProducto)){
+            if(productoService.exitePorCodigoProducto(codigoProducto)){
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.ok(productoService.actualizar(codigoProducto, producto));
