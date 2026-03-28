@@ -12,12 +12,12 @@ public interface IVentaService {
 
     Venta guardar(Venta venta);
 
-    Optional<Venta> buscarPorCodigoVenta(int codigoVenta);
+    Optional<Venta> buscarPorCodigoVenta(long codigoVenta);
 
-    Venta actualizar(int codigoVenta, Venta venta);
+    Venta actualizar(long codigoVenta, Venta venta);
 
-    void eliminar(int codigoVenta);
+    void eliminar(long codigoVenta);
 
-    boolean existePorCodigoVenta(int codigoVenta);
+    boolean existePorCodigoVenta(long codigoVenta);
 
 }
