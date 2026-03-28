@@ -11,62 +11,52 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class VentaService implements IVentaService{
+public class VentaService implements IVentaService {
 
     private final VentaRepository ventaRepository;
 
-    public VentaService(VentaRepository ventaRepository){
+    public VentaService(VentaRepository ventaRepository) {
         this.ventaRepository = ventaRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Venta> listarVentas(){
+    public List<Venta> listarVentas() {
         return ventaRepository.findAll();
     }
 
     @Override
-    public List<Venta> listarVentasActivas(){
+    public List<Venta> listarVentasActivas() {
         return ventaRepository.findByEstado(1);
     }
 
     @Override
-    public Venta guardar(Venta venta){
-        //Validar datos antes de guardar
+    public Venta guardar(Venta venta) {
         validarVenta(venta);
-
-        //Si el estado es 0, se activa por defecto
-        if (venta.getEstado() == 0){
+        if (venta.getEstado() == 0) {
             venta.setEstado(1);
         }
-
         return ventaRepository.save(venta);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Venta> buscarPorCodigoVenta(Long codigoVenta){
+    public Optional<Venta> buscarPorCodigoVenta(Long codigoVenta) {
         return ventaRepository.findById(codigoVenta);
     }
 
     @Override
-    public Venta actualizar(Long codigoVenta, Venta venta){
-        //Verificar si existe
+    public Venta actualizar(Long codigoVenta, Venta venta) {
         Venta ventaExistente = ventaRepository.findById(codigoVenta)
                 .orElseThrow(() -> new IllegalArgumentException("La venta no se encontró por el código: " + codigoVenta));
-
-        //Forzar que el código sea el de la URL
         venta.setCodigoVenta(ventaExistente.getCodigoVenta());
-
-        //Validar datos
         validarVenta(venta);
-
         return ventaRepository.save(venta);
     }
 
     @Override
-    public void eliminar(Long codigoVenta){
-        if (!ventaRepository.existsById(codigoVenta)){
+    public void eliminar(Long codigoVenta) {
+        if (!ventaRepository.existsById(codigoVenta)) {
             throw new IllegalArgumentException("La venta no se encontró por el código: " + codigoVenta);
         }
         ventaRepository.deleteById(codigoVenta);
@@ -78,14 +68,11 @@ public class VentaService implements IVentaService{
         return ventaRepository.existsById(codigoVenta);
     }
 
-    private void validarVenta(Venta venta){
-        //Validaciones del negocio
-
-        if (venta.getFechaVenta() == null){
+    private void validarVenta(Venta venta) {
+        if (venta.getFechaVenta() == null) {
             throw new IllegalArgumentException("La fecha de la venta es obligatoria");
         }
-
-        if (venta.getTotal() == null || venta.getTotal().compareTo(BigDecimal.ZERO) <= 0){
+        if (venta.getTotal() == null || venta.getTotal().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("El total debe ser mayor a 0");
         }
     }
