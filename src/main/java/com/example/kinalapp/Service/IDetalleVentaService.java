@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDetalleVentaService {
+
     List<DetalleVenta> listarDetalleVenta();
-    List<DetalleVenta> listarDetalleVentaActivos();
 
     DetalleVenta guardar(DetalleVenta detalleVenta);
 

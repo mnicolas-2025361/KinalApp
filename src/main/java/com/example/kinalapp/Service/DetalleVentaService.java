@@ -26,17 +26,8 @@ public class DetalleVentaService implements IDetalleVentaService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<DetalleVenta> listarDetalleVentaActivos() {
-        return detalleVentaRepository.findByEstado(1);
-    }
-
-    @Override
     public DetalleVenta guardar(DetalleVenta detalleVenta) {
         validarDetalleVenta(detalleVenta);
-        if (detalleVenta.getEstado() == 0) {
-            detalleVenta.setEstado(1);
-        }
         return detalleVentaRepository.save(detalleVenta);
     }
 
