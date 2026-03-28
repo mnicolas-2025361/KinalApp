@@ -14,7 +14,7 @@ public class DetalleVenta {
     @Column (name = "codigo_Detalle_Venta")
     private String codigoDetalleVenta;
     @Column
-    private int cantidad;
+    private long cantidad;
     @Column
     private BigDecimal precioUnitario;
     @Column
@@ -23,7 +23,7 @@ public class DetalleVenta {
     public DetalleVenta(){
     }
 
-    public DetalleVenta(BigDecimal subtotal, BigDecimal precioUnitario, int cantidad, String codigoDetalleVenta) {
+    public DetalleVenta(BigDecimal subtotal, BigDecimal precioUnitario, long cantidad, String codigoDetalleVenta) {
         this.subtotal = subtotal;
         this.precioUnitario = precioUnitario;
         this.cantidad = cantidad;
@@ -54,11 +54,11 @@ public class DetalleVenta {
         this.precioUnitario = precioUnitario;
     }
 
-    public int getCantidad() {
+    public long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(long cantidad) {
         this.cantidad = cantidad;
     }
 }
