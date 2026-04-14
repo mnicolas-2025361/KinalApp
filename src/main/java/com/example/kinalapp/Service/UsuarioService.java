@@ -64,6 +64,12 @@ public class UsuarioService implements IUsuarioService{
         return usuarioRepository.existsById(codigoUsuario);
     }
 
+    @Override
+    public Usuario findByUserName(String username) {
+        return usuarioRepository.findByUserName(username).orElse(null);
+    }
+
+
     private void validarUsuario(Usuario usuario){
         if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().trim().isEmpty()){
             throw new IllegalArgumentException(("El Código de usuario es un dato obligatorio"));
