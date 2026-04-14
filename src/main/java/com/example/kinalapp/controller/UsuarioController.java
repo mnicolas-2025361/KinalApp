@@ -1,16 +1,15 @@
 package com.example.kinalapp.controller;
 
 import com.example.kinalapp.Service.IUsuarioService;
-import com.example.kinalapp.Service.UsuarioService;
-import com.example.kinalapp.entity.Cliente;
 import com.example.kinalapp.entity.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -33,6 +32,19 @@ public class UsuarioController {
             return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
         }catch (IllegalArgumentException e){
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password) {
+
+        Usuario user = usuarioService.findByUserName(username);
+
+        if (user != null && user.getPassword().equals(password)) {
+            return "home"; // crea home.html
+        } else {
+            return "login";
         }
     }
 
