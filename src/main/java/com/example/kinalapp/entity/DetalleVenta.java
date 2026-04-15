@@ -1,9 +1,6 @@
 package com.example.kinalapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -19,6 +16,14 @@ public class DetalleVenta {
     private BigDecimal precioUnitario;
     @Column
     private BigDecimal subtotal;
+
+    @ManyToMany
+    @JoinColumn(name = "Ventas_codigo")
+    private Venta venta;
+
+    @ManyToOne
+    @JoinColumn(name = "Productos_codigo")
+    private Producto producto;
 
     public DetalleVenta() {
     }
