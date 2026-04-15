@@ -19,7 +19,7 @@ public class Venta {
     @Column
     private long estado;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "Cliente_dpi")
     private Cliente cliente;
 

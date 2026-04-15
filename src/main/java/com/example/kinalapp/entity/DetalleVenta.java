@@ -17,7 +17,7 @@ public class DetalleVenta {
     @Column
     private BigDecimal subtotal;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "Ventas_codigo")
     private Venta venta;
 
