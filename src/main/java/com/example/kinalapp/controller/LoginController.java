@@ -16,10 +16,15 @@ public class LoginController {
     @PostMapping("/login")
     public String procesarLogin(@RequestParam String username,
                                 @RequestParam String password) {
-
         if (username.equals("admin") && password.equals("1234")) {
-            return "home";
-        } else {
+            return "home-admin";
+        }
+
+        else if (username.equals("kinal") && password.equals("kinal2024")) {
+            return "home-usuario";
+        }
+
+        else {
             return "login";
         }
     }
