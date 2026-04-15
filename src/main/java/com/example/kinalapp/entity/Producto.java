@@ -1,11 +1,9 @@
 package com.example.kinalapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "productos")
@@ -26,6 +24,10 @@ public class Producto {
 
     @Column
     private long estado;
+
+    @OneToMany(mappedBy = "producto")
+    private List<DetalleVenta> detalles;
+
 
     public Producto() {
     }
