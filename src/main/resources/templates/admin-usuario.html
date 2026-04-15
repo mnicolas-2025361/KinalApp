@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Usuarios</title>
+    <link rel="stylesheet" href="/ad-usuario.css">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <h2>AdminPanel</h2>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Usuarios</a></li>
+                <li><a href="logout.php">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header>
+            <h1>Gestión de Usuarios</h1>
+            <button class="btn-add">+ Nuevo Usuario</button>
+        </header>
+
+        <section class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>juan@ejemplo.com</td>
+                    <td>Administrador</td>
+                    <td>
+                        <button class="btn-edit">Editar</button>
+                        <button class="btn-delete">Eliminar</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+</body>
+</html>

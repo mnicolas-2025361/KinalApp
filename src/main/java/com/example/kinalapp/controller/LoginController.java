@@ -20,10 +20,6 @@ public class LoginController {
             return "home-admin";
         }
 
-        else if (username.equals("kinal") && password.equals("kinal2024")) {
-            return "home-usuario";
-        }
-
         else {
             return "login";
         }

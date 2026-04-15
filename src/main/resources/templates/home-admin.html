@@ -16,26 +16,32 @@
     <p>Gestión total del sistema:</p>
 
     <div class="grid-entities">
-        <a href="/usuarios" class="card">
-            <h3> Usuarios</h3>
+
+        <a th:href="@{/admin-usuarios}" class="card">
+            <h3>Usuarios</h3>
             <p>Altas, bajas y roles</p>
         </a>
-        <a href="/productos" class="card">
-            <h3> Productos</h3>
+
+        <a th:href="@{/productos}" class="card">
+            <h3>Productos</h3>
             <p>Control de inventario</p>
         </a>
-        <a href="/DetalleVenta" class="card">
-            <h3> DetalleVenta</h3>
+
+        <a th:href="@{/detalle-venta}" class="card">
+            <h3>DetalleVenta</h3>
             <p>Análisis de datos</p>
         </a>
-        <a href="/ventas" class="card">
-            <h3> Ventas</h3>
+
+        <a th:href="@{/ventas}" class="card">
+            <h3>Ventas</h3>
             <p>Registros financieros</p>
         </a>
-        <a href="/Clientes" class="card">
-            <h3> Clientes</h3>
+
+        <a th:href="@{/clientes}" class="card">
+            <h3>Clientes</h3>
             <p>Ajustes del sistema</p>
         </a>
+
     </div>
 
     <a href="/login" class="logout-btn">Cerrar Sesión Segura</a>
