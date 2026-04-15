@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    background: linear-gradient(135deg, #ff0000, #0004ff);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -19,9 +19,9 @@ form {
 
 .titulo {
     position: absolute;
-    top: 200px;        /* lo sube hasta arriba */
-    left: 50%;        /* lo mueve al centro */
-    transform: translateX(-50%); /* centra perfectamente */
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 h2 {
