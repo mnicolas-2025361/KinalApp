@@ -1,9 +1,8 @@
 package com.example.kinalapp.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -21,6 +20,10 @@ public class Usuario {
     private String rol;
     @Column
     private long estado;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Venta> ventas;
+
 
     public Usuario(){
     }
