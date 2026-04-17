@@ -1,55 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - Usuarios</title>
-    <link rel="stylesheet" href="/ad-usuario.css">
+    <title>Usuarios</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/ad-usuario.css}">
 </head>
 <body>
-<div class="container">
-    <aside class="sidebar">
-        <h2>AdminPanel</h2>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Usuarios</a></li>
-                <li><a href="logout.php">Cerrar Sesión</a></li>
-            </ul>
-        </nav>
-    </aside>
 
-    <main class="content">
-        <header>
-            <h1>Gestión de Usuarios</h1>
-            <button class="btn-add">+ Nuevo Usuario</button>
-        </header>
+<h1>Usuarios</h1>
 
-        <section class="table-container">
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td>juan@ejemplo.com</td>
-                    <td>Administrador</td>
-                    <td>
-                        <button class="btn-edit">Editar</button>
-                        <button class="btn-delete">Eliminar</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
-</div>
+<!-- Botón nuevo -->
+<a th:href="@{/usuarios/nuevo}">+ Nuevo Usuario</a>
+
+<br><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${usuarios}">
+        <td th:text="${u.codigoUsuario}"></td>
+        <td th:text="${u.userName}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.rol}"></td>
+        <td>
+            <a th:href="@{'/usuarios/editar/' + ${u.codigoUsuario}}">Editar</a>
+            <a th:href="@{'/usuarios/eliminar/' + ${u.codigoUsuario}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

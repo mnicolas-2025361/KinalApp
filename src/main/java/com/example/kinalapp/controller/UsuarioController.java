@@ -1,6 +1,6 @@
 package com.example.kinalapp.controller;
 
-import com.example.kinalapp.Service.IUsuarioService;
+import com.example.kinalapp.Service.UsuarioService;
 import com.example.kinalapp.entity.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,47 +10,42 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private final IUsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-    public UsuarioController(IUsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/lista")
-    public String listarUsuarios(Model model){
-        model.addAttribute("usuarios", usuarioService.listarUsuariosActivos());
-        return "usuarios";
+    @GetMapping
+    public String listar(Model model){
+        model.addAttribute("usuarios", usuarioService.listar());
+        return "admin-usuario";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarUsuario(@PathVariable String id, Model model){
-        Usuario usuario = usuarioService.buscarPorCodigoUsuario(id).orElse(null);
-        model.addAttribute("usuario", usuario);
-        return "editar_usuario";
+    @GetMapping("/nuevo")
+    public String nuevo(Model model){
+        model.addAttribute("usuario", new Usuario());
+        return "form-usuario";
     }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(Usuario usuario){
+    public String guardar(@ModelAttribute Usuario usuario, Model model){
         usuarioService.guardar(usuario);
-        return "redirect:/usuarios/lista";
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuarios", usuarioService.listar());
+        return "admin-usuario";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable("id") String id, Model model){
+        Usuario usuario = usuarioService.buscarPorCodigoUsuario(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+        return "form-usuario";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable String id){
+    public String eliminar(@PathVariable("id") String id){
         usuarioService.eliminar(id);
-        return "redirect:/usuarios/lista";
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam String username,
-                        @RequestParam String password) {
-
-        Usuario user = usuarioService.findByUserName(username);
-
-        if (user != null && user.getPassword().equals(password)) {
-            return "home-admin";
-        } else {
-            return "login";
-        }
+        return "redirect:/usuarios";
     }
 }
