@@ -3,19 +3,23 @@ package com.example.kinalapp.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "ventas")
 public class Venta {
+
     @Id
     @Column
     private Long codigoVenta;
+
     @Column
-    private Date fechaVenta;
+    private LocalDate fechaVenta;
+
     @Column
     private BigDecimal total;
+
     @Column
     private long estado;
 
@@ -24,16 +28,16 @@ public class Venta {
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn (name = "Usuario_codigo")
+    @JoinColumn(name = "Usuario_codigo")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "venta")
     private List<DetalleVenta> detalles;
 
-    public Venta(){
+    public Venta() {
     }
 
-    public Venta(Long codigoVenta, long estado, BigDecimal total, Date fechaVenta) {
+    public Venta(Long codigoVenta, long estado, BigDecimal total, LocalDate fechaVenta) {
         this.codigoVenta = codigoVenta;
         this.estado = estado;
         this.total = total;
@@ -48,12 +52,12 @@ public class Venta {
         this.codigoVenta = codigoVenta;
     }
 
-    public long getEstado() {
-        return estado;
+    public LocalDate getFechaVenta() {
+        return fechaVenta;
     }
 
-    public void setEstado(long estado) {
-        this.estado = estado;
+    public void setFechaVenta(LocalDate fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
     public BigDecimal getTotal() {
@@ -64,12 +68,11 @@ public class Venta {
         this.total = total;
     }
 
-    public Date getFechaVenta() {
-        return fechaVenta;
+    public long getEstado() {
+        return estado;
     }
 
-    public void setFechaVenta(Date fechaVenta) {
-        this.fechaVenta = fechaVenta;
+    public void setEstado(long estado) {
+        this.estado = estado;
     }
-
 }
