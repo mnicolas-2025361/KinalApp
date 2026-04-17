@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Clientes</title>
+    <link rel="stylesheet" th:href="@{/admin-cliente.css}">
+</head>
+<body>
+
+<h1>Clientes</h1>
+
+<a href="/clientes/nuevo">Nuevo Cliente</a>
+
+<table border="1">
+    <tr>
+        <th>DPI</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Dirección</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+
+    <tr th:each="c : ${clientes}">
+        <td th:text="${c.DPICliente}"></td>
+        <td th:text="${c.nombreCliente}"></td>
+        <td th:text="${c.apellidoCliente}"></td>
+        <td th:text="${c.direccion}"></td>
+        <td th:text="${c.estado}"></td>
+
+        <td>
+            <a th:href="@{'/clientes/editar/' + ${c.DPICliente}}">Editar</a>
+            <a th:href="@{'/clientes/eliminar/' + ${c.DPICliente}}"
+               onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
