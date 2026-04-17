@@ -2,12 +2,9 @@ package com.example.kinalapp.controller;
 
 import com.example.kinalapp.Service.IUsuarioService;
 import com.example.kinalapp.entity.Usuario;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -19,20 +16,29 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping
-    public ResponseEntity<Usuario> buscarPorCodigoUsuario(@PathVariable String codigoUsuario){
-        return usuarioService.buscarPorCodigoUsuario(codigoUsuario)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/lista")
+    public String listarUsuarios(Model model){
+        model.addAttribute("usuarios", usuarioService.listarUsuariosActivos());
+        return "usuarios";
     }
 
-    @PostMapping ResponseEntity<?> guardar(@RequestBody Usuario usuario){
-        try {
-            Usuario nuevoUsuario = usuarioService.guardar(usuario);
-            return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/editar/{id}")
+    public String editarUsuario(@PathVariable String id, Model model){
+        Usuario usuario = usuarioService.buscarPorCodigoUsuario(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+        return "editar_usuario";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarUsuario(Usuario usuario){
+        usuarioService.guardar(usuario);
+        return "redirect:/usuarios/lista";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable String id){
+        usuarioService.eliminar(id);
+        return "redirect:/usuarios/lista";
     }
 
     @PostMapping("/login")
@@ -42,44 +48,9 @@ public class UsuarioController {
         Usuario user = usuarioService.findByUserName(username);
 
         if (user != null && user.getPassword().equals(password)) {
-            return "home"; // crea home.html
+            return "home-admin";
         } else {
             return "login";
         }
     }
-
-    @DeleteMapping("/{codigoUsuario}")
-    public ResponseEntity<Void> eliminar(@PathVariable String codigoUsuario){
-        try {
-            if (!usuarioService.existePorCodigoUsuario(codigoUsuario)){
-                return ResponseEntity.notFound().build();
-            }
-            usuarioService.eliminar(codigoUsuario);
-            return ResponseEntity.noContent().build();
-        }catch (RuntimeException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{codigoUsuario}")
-    public ResponseEntity<?> actualizar(@PathVariable String codigoUsuario, @RequestBody Usuario usuario){
-        try {
-            if(!usuarioService.existePorCodigoUsuario(codigoUsuario)){
-                return ResponseEntity.notFound().build();
-            }
-            Usuario usuarioActualizado = usuarioService.actualizar(codigoUsuario, usuario);
-            return ResponseEntity.ok(usuarioActualizado);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping ("/UsuariosActivos")
-    public ResponseEntity<List<Usuario>>UsuariosActivos(){
-        List<Usuario> usuariosActivos = usuarioService.listarUsuariosActivos();
-        return ResponseEntity.ok(usuariosActivos);
-    }
-
 }
