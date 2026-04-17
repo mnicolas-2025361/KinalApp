@@ -1,0 +1,114 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ff0000, #0004ff);
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+a[href*="/nuevo"] {
+    text-decoration: none;
+    background: #27ae60;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    align-self: flex-start;
+    max-width: fit-content;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+a[href*="/nuevo"]:hover {
+    background: #2ecc71;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+table {
+    width: 100%;
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.4);
+    color: #00d4ff;
+    padding: 18px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+td {
+    padding: 15px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1rem;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+td a {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+td a[href*="editar"] {
+    background: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+    border: 1px solid #f1c40f;
+}
+
+td a[href*="editar"]:hover {
+    background: #f1c40f;
+    color: #000;
+}
+
+td a[href*="eliminar"] {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+td a[href*="eliminar"]:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+td:nth-child(5) {
+    font-weight: bold;
+    font-size: 0.8rem;
+}

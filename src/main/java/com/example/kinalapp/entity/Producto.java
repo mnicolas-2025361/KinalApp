@@ -1,7 +1,6 @@
 package com.example.kinalapp.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,41 +9,31 @@ import java.util.List;
 public class Producto {
 
     @Id
-    @Column(name = "codigo_producto")
-    private long codigoProducto;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo_producto", nullable = false)
+    private Long codigoProducto;
 
-    @Column
+    @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
 
-    @Column
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
-    @Column
+    @Column(nullable = false)
     private long stock;
 
-    @Column
-    private long estado;
+    @Column(nullable = false)
+    private long estado = 1;
 
     @OneToMany(mappedBy = "producto")
     private List<DetalleVenta> detalles;
+    public Producto() {}
 
-
-    public Producto() {
-    }
-
-    public Producto(long codigoProducto, String nombreProducto, BigDecimal precio, long stock, long estado) {
-        this.codigoProducto = codigoProducto;
-        this.nombreProducto = nombreProducto;
-        this.precio = precio;
-        this.stock = stock;
-        this.estado = estado;
-    }
-
-    public long getCodigoProducto() {
+    public Long getCodigoProducto() {
         return codigoProducto;
     }
 
-    public void setCodigoProducto(long codigoProducto) {
+    public void setCodigoProducto(Long codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
