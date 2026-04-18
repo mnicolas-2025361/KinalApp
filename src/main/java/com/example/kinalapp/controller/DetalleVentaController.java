@@ -6,17 +6,14 @@ import com.example.kinalapp.Service.IVentaService;
 import com.example.kinalapp.entity.DetalleVenta;
 import com.example.kinalapp.entity.Producto;
 import com.example.kinalapp.entity.Venta;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Controller
-@RequestMapping("/detalles-venta")
+@RequestMapping("/detalle-venta")
 public class DetalleVentaController {
 
     private final IDetalleVentaService service;
@@ -34,7 +31,7 @@ public class DetalleVentaController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("detalles", service.listarDetalleVenta());
-        return "detalleventa/admin-detalleventa";
+        return "admin-detalleventa";
     }
 
     @GetMapping("/nuevo")
@@ -42,7 +39,7 @@ public class DetalleVentaController {
         model.addAttribute("detalle", new DetalleVenta());
         model.addAttribute("ventas", ventaService.listarVentas());
         model.addAttribute("productos", productoService.listarProductos());
-        return "detalleventa/form-detalleventa";
+        return "form-detalleventa";
     }
 
     @PostMapping("/guardar")
@@ -58,18 +55,17 @@ public class DetalleVentaController {
         d.setCantidad(cantidad);
         d.setPrecioUnitario(precio);
 
-        // 🔥 convertir IDs a entidades
+        d.setSubtotal(precio.multiply(BigDecimal.valueOf(cantidad)));
+
         Venta venta = ventaService.buscarPorCodigoVenta(ventaId)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
+
         Producto producto = productoService.buscarPorId(productoId)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         d.setVenta(venta);
         d.setProducto(producto);
-
         service.guardar(d);
-
-        return "redirect:/detalles-venta";
+        return "redirect:/detalle-venta";
     }
-}
 }

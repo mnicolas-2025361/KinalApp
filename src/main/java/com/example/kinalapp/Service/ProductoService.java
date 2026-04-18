@@ -44,6 +44,11 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
+    public Optional<Producto> buscarPorId(long id) {
+        return Optional.empty();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<Producto> buscarPorCodigoProductos(long codigoProducto) {
         return productoRepository.findById(codigoProducto);

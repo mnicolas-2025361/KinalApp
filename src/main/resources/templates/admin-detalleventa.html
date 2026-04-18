@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle Venta</title>
+    <link rel="stylesheet" href="/admin-detalleventa.css">
+</head>
+<body>
+
+<h1>DETALLE DE VENTAS</h1>
+
+<a href="/detalles-venta/nuevo">+ Nuevo Detalle</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Venta</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Subtotal</th>
+        <th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d : ${detalles}">
+        <td th:text="${d.codigoDetalleVenta}"></td>
+        <td th:text="${d.venta.codigoVenta}"></td>
+        <td th:text="${d.producto.nombre}"></td>
+        <td th:text="${d.cantidad}"></td>
+        <td th:text="${d.precioUnitario}"></td>
+        <td th:text="${d.subtotal}"></td>
+        <td>
+            <a th:href="@{'/detalle-venta/eliminar/' + ${d.codigoDetalleVenta}}">
+                Eliminar
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

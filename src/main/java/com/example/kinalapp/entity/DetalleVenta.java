@@ -1,19 +1,22 @@
 package com.example.kinalapp.entity;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "detalle_venta")
 public class DetalleVenta {
+
     @Id
     @Column(name = "codigo_Detalle_Venta")
     private String codigoDetalleVenta;
+
     @Column
     private long cantidad;
+
     @Column
     private BigDecimal precioUnitario;
+
     @Column
     private BigDecimal subtotal;
 
@@ -25,15 +28,9 @@ public class DetalleVenta {
     @JoinColumn(name = "Productos_codigo")
     private Producto producto;
 
-    public DetalleVenta() {
-    }
+    public DetalleVenta() {}
 
-    public DetalleVenta(String codigoDetalleVenta, long cantidad, BigDecimal precioUnitario, BigDecimal subtotal) {
-        this.codigoDetalleVenta = codigoDetalleVenta;
-        this.cantidad = cantidad;
-        this.precioUnitario = precioUnitario;
-        this.subtotal = subtotal;
-    }
+    // GETTERS Y SETTERS
 
     public String getCodigoDetalleVenta() {
         return codigoDetalleVenta;
@@ -65,5 +62,21 @@ public class DetalleVenta {
 
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 }

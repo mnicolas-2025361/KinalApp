@@ -11,6 +11,8 @@ public interface IProductoService {
 
     Producto guardar(Producto producto);
 
+    Optional<Producto> buscarPorId(long id);
+
     Optional<Producto> buscarPorCodigoProductos(long codigoProducto);
 
     void eliminar(long codigoProducto);

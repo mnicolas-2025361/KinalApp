@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Detalle</title>
+    <link rel="stylesheet" href="/form-detalleventa.css">
+</head>
+<body>
+
+<form action="/detalle-venta/guardar" method="post">
+
+    <h1>Nuevo Detalle</h1>
+
+    <input type="text" name="codigo" placeholder="Código" required>
+
+    <input type="number" name="cantidad" placeholder="Cantidad" required>
+
+    <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+
+    <select name="ventaId" required>
+        <option value="">Seleccionar Venta</option>
+        <option th:each="v : ${ventas}"
+                th:value="${v.codigoVenta}"
+                th:text="'Venta #' + ${v.codigoVenta}">
+        </option>
+    </select>
+
+    <select name="productoId" required>
+        <option value="">Seleccionar Producto</option>
+        <option th:each="p : ${productos}"
+                th:value="${p.codigoProducto}"
+                th:text="${p.nombre}">
+        </option>
+    </select>
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+</body>
+</html>
