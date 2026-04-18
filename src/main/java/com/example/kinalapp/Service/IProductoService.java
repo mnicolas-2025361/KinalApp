@@ -1,7 +1,6 @@
 package com.example.kinalapp.Service;
 
 import com.example.kinalapp.entity.Producto;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,11 +11,13 @@ public interface IProductoService {
 
     Producto guardar(Producto producto);
 
+    Optional<Producto> buscarPorId(long id);
+
     Optional<Producto> buscarPorCodigoProductos(long codigoProducto);
 
     void eliminar(long codigoProducto);
 
-    boolean exitePorCodigoProducto(long codigoProducto);
+    boolean existePorCodigoProducto(long codigoProducto);
 
     Producto actualizar(long codigoProducto, Producto producto);
 }

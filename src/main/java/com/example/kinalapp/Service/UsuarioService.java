@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UsuarioService implements IUsuarioService{
+public class UsuarioService implements IUsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
@@ -20,73 +20,83 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     @Transactional(readOnly = true)
+    public List<Usuario> listar(){
+        return usuarioRepository.findAll();
+    }
+
+    @Override
     public List<Usuario> listarUsuarios(){
         return usuarioRepository.findAll();
     }
 
     @Override
     public List<Usuario> listarUsuariosActivos(){
-        return  usuarioRepository.findByEstado(1);
+        return usuarioRepository.findByEstado(1);
     }
 
     @Override
     public Usuario guardar(Usuario usuario){
         validarUsuario(usuario);
+
+        // Evita error 500
         if (usuario.getEstado() == 0){
             usuario.setEstado(1);
         }
+
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Optional<Usuario> buscarPorCodigoUsuario(String codigoUsuario) {
-        return Optional.empty();
+    public Optional<Usuario> buscarPorCodigoUsuario(String codigoUsuario){
+        return usuarioRepository.findById(codigoUsuario);
     }
 
     @Override
     public Usuario actualizar(String codigoUsuario, Usuario usuario){
         if(!usuarioRepository.existsById(codigoUsuario)){
-            throw new RuntimeException("El usuario no se encontró con el código: " + codigoUsuario);
+            throw new RuntimeException("No existe el usuario");
         }
+
         usuario.setCodigoUsuario(codigoUsuario);
         validarUsuario(usuario);
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public void eliminar(String codigoUsuario) {
-
+    public void eliminar(String codigoUsuario){
+        usuarioRepository.deleteById(codigoUsuario);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public boolean existePorCodigoUsuario(String codigoUsuario){
         return usuarioRepository.existsById(codigoUsuario);
     }
 
+    @Override
+    public Usuario findByUserName(String username){
+        return usuarioRepository.findByUserName(username).orElse(null);
+    }
+
     private void validarUsuario(Usuario usuario){
+
         if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().trim().isEmpty()){
-            throw new IllegalArgumentException(("El Código de usuario es un dato obligatorio"));
+            throw new IllegalArgumentException("Código obligatorio");
         }
 
         if (usuario.getUserName() == null || usuario.getUserName().trim().isEmpty()){
-            throw new IllegalArgumentException(("El User de usuario es obligatorio")
-            );
+            throw new IllegalArgumentException("Usuario obligatorio");
         }
 
         if (usuario.getEmail() == null || usuario.getEmail().trim().isEmpty()){
-            throw new IllegalArgumentException(("El email del usuario es obligatiria")
-            );
+            throw new IllegalArgumentException("Email obligatorio");
         }
 
         if (usuario.getPassword() == null || usuario.getPassword().trim().isEmpty()){
-            throw new IllegalArgumentException(("La password de usuario es obligatoria")
-            );
+            throw new IllegalArgumentException("Password obligatoria");
         }
 
         if (usuario.getRol() == null || usuario.getRol().trim().isEmpty()){
-            throw new IllegalArgumentException(("El rol del usuario es obligatorio")
-            );
+            throw new IllegalArgumentException("Rol obligatorio");
         }
     }
 }

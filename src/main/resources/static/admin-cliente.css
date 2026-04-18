@@ -1,0 +1,99 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ff0000, #0004ff);
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+a[href*="/nuevo"] {
+    text-decoration: none;
+    background: #27ae60;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    align-self: flex-start;
+    max-width: fit-content;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+a[href*="/nuevo"]:hover {
+    background: #2ecc71;
+    transform: scale(1.05);
+}
+
+table {
+    width: 100%;
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+th {
+    background: rgba(0, 0, 0, 0.4);
+    color: #00d4ff;
+    padding: 18px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+td {
+    padding: 15px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+td a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+td a[href*="editar"] {
+    color: #f1c40f;
+    border: 1px solid #f1c40f;
+}
+
+td a[href*="editar"]:hover {
+    background: #f1c40f;
+    color: black;
+}
+
+td a[href*="eliminar"] {
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+td a[href*="eliminar"]:hover {
+    background: #e74c3c;
+    color: white;
+}

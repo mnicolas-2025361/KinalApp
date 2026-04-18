@@ -33,11 +33,19 @@ public class ProductoService implements IProductoService {
 
     @Override
     public Producto guardar(Producto producto) {
+
         validarProducto(producto);
+
         if (producto.getEstado() == 0) {
             producto.setEstado(1);
         }
+
         return productoRepository.save(producto);
+    }
+
+    @Override
+    public Optional<Producto> buscarPorId(long id) {
+        return Optional.empty();
     }
 
     @Override
@@ -48,37 +56,51 @@ public class ProductoService implements IProductoService {
 
     @Override
     public Producto actualizar(long codigoProducto, Producto producto) {
+
         if (!productoRepository.existsById(codigoProducto)) {
-            throw new RuntimeException("El producto no se encontró con el código: " + codigoProducto);
+            throw new RuntimeException("No existe el producto");
         }
-        producto.setCodigoProducto(codigoProducto);
+
+        producto.setCodigoProducto((long) codigoProducto);
+
         validarProducto(producto);
+
         return productoRepository.save(producto);
     }
 
     @Override
     public void eliminar(long codigoProducto) {
-        if (!productoRepository.existsById(codigoProducto)) {
-            throw new RuntimeException("El producto no se encontró con el código: " + codigoProducto);
+        Producto producto = productoRepository.findById(codigoProducto).orElse(null);
+
+        if (producto != null) {
+            producto.setEstado(0);
+            productoRepository.save(producto);
         }
-        productoRepository.deleteById(codigoProducto);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public boolean exitePorCodigoProducto(long codigoProducto) {
+    public boolean existePorCodigoProducto(long codigoProducto) {
         return productoRepository.existsById(codigoProducto);
     }
 
+    // ✅ VALIDACIÓN MEJORADA
     private void validarProducto(Producto producto) {
+
+        if (producto == null) {
+            throw new RuntimeException("Producto nulo");
+        }
+
         if (producto.getNombreProducto() == null || producto.getNombreProducto().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del producto es obligatorio");
+            throw new RuntimeException("Nombre requerido");
         }
+
         if (producto.getPrecio() == null || producto.getPrecio().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("El precio debe ser mayor a 0");
+            throw new RuntimeException("Precio inválido");
         }
+
         if (producto.getStock() < 0) {
-            throw new IllegalArgumentException("El stock no puede ser negativo");
+            throw new RuntimeException("Stock inválido");
         }
     }
 }

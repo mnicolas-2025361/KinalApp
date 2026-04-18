@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | KinalApp</title>
+    <link rel="stylesheet" th:href="@{/admin.css}">
+</head>
+<body>
+
+<nav>
+    <h2>KinalApp - Panel de Control</h2>
+</nav>
+
+<div class="container">
+    <h1>Bienvenido, Administrador</h1>
+    <p>Gestión total del sistema:</p>
+
+    <div class="grid-entities">
+
+        <a th:href="@{/admin-usuarios}" class="card">
+            <h3>Usuarios</h3>
+            <p>Altas, bajas y roles</p>
+        </a>
+
+        <a th:href="@{/productos}" class="card">
+            <h3>Productos</h3>
+            <p>Control de inventario</p>
+        </a>
+
+        <a th:href="@{/detalle-venta}" class="card">
+            <h3>DetalleVenta</h3>
+            <p>Análisis de datos</p>
+        </a>
+
+        <a th:href="@{/ventas}" class="card">
+            <h3>Ventas</h3>
+            <p>Registros financieros</p>
+        </a>
+
+        <a th:href="@{/clientes}" class="card">
+            <h3>Clientes</h3>
+            <p>Ajustes del sistema</p>
+        </a>
+
+    </div>
+
+    <a href="/login" class="logout-btn">Cerrar Sesión Segura</a>
+</div>
+
+</body>
+</html>

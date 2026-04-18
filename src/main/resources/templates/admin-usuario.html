@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Usuarios</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/ad-usuario.css}">
+</head>
+<body>
+
+<h1>Usuarios</h1>
+
+<!-- Botón nuevo -->
+<a th:href="@{/usuarios/nuevo}">+ Nuevo Usuario</a>
+
+<br><br>
+
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="u : ${usuarios}">
+        <td th:text="${u.codigoUsuario}"></td>
+        <td th:text="${u.userName}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.rol}"></td>
+        <td>
+            <a th:href="@{'/usuarios/editar/' + ${u.codigoUsuario}}">Editar</a>
+            <a th:href="@{'/usuarios/eliminar/' + ${u.codigoUsuario}}">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

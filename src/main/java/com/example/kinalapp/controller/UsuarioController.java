@@ -1,73 +1,51 @@
 package com.example.kinalapp.controller;
 
-import com.example.kinalapp.Service.IUsuarioService;
 import com.example.kinalapp.Service.UsuarioService;
-import com.example.kinalapp.entity.Cliente;
 import com.example.kinalapp.entity.Usuario;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private final IUsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-    public UsuarioController(IUsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService){
         this.usuarioService = usuarioService;
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscarPorCodigoUsuario(@PathVariable String codigoUsuario){
-        return usuarioService.buscarPorCodigoUsuario(codigoUsuario)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public String listar(Model model){
+        model.addAttribute("usuarios", usuarioService.listar());
+        return "admin-usuario";
     }
 
-    @PostMapping ResponseEntity<?> guardar(@RequestBody Usuario usuario){
-        try {
-            Usuario nuevoUsuario = usuarioService.guardar(usuario);
-            return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/nuevo")
+    public String nuevo(Model model){
+        model.addAttribute("usuario", new Usuario());
+        return "form-usuario";
     }
 
-    @DeleteMapping("/{codigoUsuario}")
-    public ResponseEntity<Void> eliminar(@PathVariable String codigoUsuario){
-        try {
-            if (!usuarioService.existePorCodigoUsuario(codigoUsuario)){
-                return ResponseEntity.notFound().build();
-            }
-            usuarioService.eliminar(codigoUsuario);
-            return ResponseEntity.noContent().build();
-        }catch (RuntimeException e){
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Usuario usuario, Model model){
+        usuarioService.guardar(usuario);
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("usuarios", usuarioService.listar());
+        return "admin-usuario";
     }
 
-    @PutMapping("/{codigoUsuario}")
-    public ResponseEntity<?> actualizar(@PathVariable String codigoUsuario, @RequestBody Usuario usuario){
-        try {
-            if(!usuarioService.existePorCodigoUsuario(codigoUsuario)){
-                return ResponseEntity.notFound().build();
-            }
-            Usuario usuarioActualizado = usuarioService.actualizar(codigoUsuario, usuario);
-            return ResponseEntity.ok(usuarioActualizado);
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable("id") String id, Model model){
+        Usuario usuario = usuarioService.buscarPorCodigoUsuario(id).orElse(null);
+        model.addAttribute("usuario", usuario);
+        return "form-usuario";
     }
 
-    @GetMapping ("/UsuariosActivos")
-    public ResponseEntity<List<Usuario>>UsuariosActivos(){
-        List<Usuario> usuariosActivos = usuarioService.listarUsuariosActivos();
-        return ResponseEntity.ok(usuariosActivos);
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable("id") String id){
+        usuarioService.eliminar(id);
+        return "redirect:/usuarios";
     }
-
 }

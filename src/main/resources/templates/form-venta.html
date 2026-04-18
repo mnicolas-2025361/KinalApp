@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Venta</title>
+    <link rel="stylesheet" th:href="@{/form-venta.css}">
+</head>
+<body>
+
+<h1>Venta</h1>
+
+<form th:action="@{/ventas/guardar}" th:object="${venta}" method="post">
+
+    <label>Código</label>
+    <input type="number" th:field="*{codigoVenta}" required>
+
+    <label>Fecha</label>
+    <input type="date" th:field="*{fechaVenta}" required>
+
+    <label>Total</label>
+    <input type="number" step="0.01" th:field="*{total}" required>
+
+    <label>Estado</label>
+    <input type="number" th:field="*{estado}">
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a th:href="@{/ventas}">Volver</a>
+
+</body>
+</html>
