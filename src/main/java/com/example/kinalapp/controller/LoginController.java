@@ -1,27 +1,44 @@
 package com.example.kinalapp.controller;
 
+import com.example.kinalapp.Service.VentaService;
+import com.example.kinalapp.entity.Venta;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class LoginController {
+
+    private final VentaService ventaService;
+
+    public LoginController(VentaService ventaService){
+        this.ventaService = ventaService;
+    }
+
+    @GetMapping("/home-admin")
+    public String homeAdmin(){
+        return "home-admin";
+    }
+
 
     @GetMapping("/login")
     public String mostrarLogin() {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String procesarLogin(@RequestParam String username,
-                                @RequestParam String password) {
-        if (username.equals("admin") && password.equals("1234")) {
-            return "home-admin";
+    @GetMapping("/home")
+    public String homeUsuario(Model model){
+
+        List<Venta> ventas = ventaService.listarVentasActivas();
+
+        if (ventas.size() > 3) {
+            ventas = ventas.subList(0, 3);
         }
 
-        else {
-            return "login";
-        }
+        model.addAttribute("ventas", ventas);
+
+        return "home-usuario";
     }
 }
