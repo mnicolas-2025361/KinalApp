@@ -25,9 +25,14 @@
     <div class="credenciales">
         <h3>Credenciales de prueba</h3>
         <p><strong>Admin:</strong> admin / 1234</p>
+        <p><Strong>Usuario:</Strong> user / 1234</p>
     </div>
 
 </div>
+
+    <div th:if="${param.error}">
+        <p style="color:red;">Usuario o contraseña incorrectos</p>
+    </div>
 
 </body>
 </html>

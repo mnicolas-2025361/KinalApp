@@ -16,28 +16,24 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    // LISTAR CLIENTES
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("clientes", clienteService.listarClientes());
         return "admin-cliente";
     }
 
-    // FORM NUEVO CLIENTE
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("cliente", new Cliente());
         return "form-cliente";
     }
 
-    // GUARDAR CLIENTE
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Cliente cliente) {
         clienteService.guardar(cliente);
         return "redirect:/clientes";
     }
 
-    // EDITAR CLIENTE
     @GetMapping("/editar/{dpi}")
     public String editar(@PathVariable String dpi, Model model) {
         Cliente cliente = clienteService.buscarPorDPI(dpi)
@@ -47,7 +43,6 @@ public class ClienteController {
         return "cliente/form";
     }
 
-    // ELIMINAR CLIENTE
     @GetMapping("/eliminar/{dpi}")
     public String eliminar(@PathVariable String dpi) {
         clienteService.eliminar(dpi);
