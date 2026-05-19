@@ -27,49 +27,48 @@ public class DetalleVentaService implements IDetalleVentaService {
 
     @Override
     public DetalleVenta guardar(DetalleVenta detalleVenta) {
+
         validarDetalleVenta(detalleVenta);
+
         return detalleVentaRepository.save(detalleVenta);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<DetalleVenta> buscarDetallePorCodigo(String codigoDetalleVenta) {
-        return detalleVentaRepository.findById(codigoDetalleVenta);
+        return Optional.empty();
     }
 
     @Override
     public DetalleVenta actualizar(String codigoDetalleVenta, DetalleVenta detalleVenta) {
-        if (!detalleVentaRepository.existsById(codigoDetalleVenta)) {
-            throw new RuntimeException("El detalle de venta no se encontró con el código: " + codigoDetalleVenta);
-        }
-        detalleVenta.setCodigoDetalleVenta(codigoDetalleVenta);
-        validarDetalleVenta(detalleVenta);
-        return detalleVentaRepository.save(detalleVenta);
+        return null;
     }
 
     @Override
     public void eliminar(String codigoDetalleVenta) {
-        if (!detalleVentaRepository.existsById(codigoDetalleVenta)) {
-            throw new RuntimeException("El detalle de venta no se encontró con el código: " + codigoDetalleVenta);
-        }
-        detalleVentaRepository.deleteById(codigoDetalleVenta);
+
     }
 
     @Override
-    @Transactional(readOnly = true)
     public boolean existePorCodigoDetalleVenta(String codigoDetalleVenta) {
-        return detalleVentaRepository.existsById(codigoDetalleVenta);
+        return false;
     }
 
     private void validarDetalleVenta(DetalleVenta detalleVenta) {
-        if (detalleVenta.getCodigoDetalleVenta() == null || detalleVenta.getCodigoDetalleVenta().trim().isEmpty()) {
-            throw new IllegalArgumentException("El código de detalle de venta es obligatorio");
-        }
+
         if (detalleVenta.getCantidad() <= 0) {
-            throw new IllegalArgumentException("La cantidad debe ser mayor a 0");
+
+            throw new IllegalArgumentException(
+                    "La cantidad debe ser mayor a 0"
+            );
         }
-        if (detalleVenta.getPrecioUnitario() == null || detalleVenta.getPrecioUnitario().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("El precio unitario debe ser mayor a 0");
+
+        if (detalleVenta.getPrecioUnitario() == null
+                || detalleVenta.getPrecioUnitario()
+                .compareTo(BigDecimal.ZERO) <= 0) {
+
+            throw new IllegalArgumentException(
+                    "El precio unitario debe ser mayor a 0"
+            );
         }
     }
 }

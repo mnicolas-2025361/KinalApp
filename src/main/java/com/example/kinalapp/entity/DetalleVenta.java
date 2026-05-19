@@ -8,8 +8,9 @@ import java.math.BigDecimal;
 public class DetalleVenta {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_Detalle_Venta")
-    private String codigoDetalleVenta;
+    private Long codigoDetalleVenta;
 
     @Column
     private long cantidad;
@@ -32,14 +33,13 @@ public class DetalleVenta {
 
     // GETTERS Y SETTERS
 
-    public String getCodigoDetalleVenta() {
+    public Long getCodigoDetalleVenta() {
         return codigoDetalleVenta;
     }
 
-    public void setCodigoDetalleVenta(String codigoDetalleVenta) {
+    public void setCodigoDetalleVenta(Long codigoDetalleVenta) {
         this.codigoDetalleVenta = codigoDetalleVenta;
     }
-
     public long getCantidad() {
         return cantidad;
     }

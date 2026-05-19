@@ -47,29 +47,24 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Optional<Usuario> buscarPorCodigoUsuario(String codigoUsuario){
-        return usuarioRepository.findById(codigoUsuario);
+    public Optional<Usuario> buscarPorCodigoUsuario(String codigoUsuario) {
+        return Optional.empty();
     }
 
     @Override
-    public Usuario actualizar(String codigoUsuario, Usuario usuario){
-        if(!usuarioRepository.existsById(codigoUsuario)){
-            throw new RuntimeException("No existe el usuario");
-        }
-
-        usuario.setCodigoUsuario(codigoUsuario);
-        validarUsuario(usuario);
-        return usuarioRepository.save(usuario);
+    public Usuario actualizar(String codigoUsuario, Usuario usuario) {
+        return null;
     }
 
     @Override
-    public void eliminar(String codigoUsuario){
-        usuarioRepository.deleteById(codigoUsuario);
+    public boolean eliminar(String codigoUsuario) {
+
+        return false;
     }
 
     @Override
-    public boolean existePorCodigoUsuario(String codigoUsuario){
-        return usuarioRepository.existsById(codigoUsuario);
+    public boolean existePorCodigoUsuario(String codigoUsuario) {
+        return false;
     }
 
     @Override
@@ -78,10 +73,6 @@ public class UsuarioService implements IUsuarioService {
     }
 
     private void validarUsuario(Usuario usuario){
-
-        if (usuario.getCodigoUsuario() == null || usuario.getCodigoUsuario().trim().isEmpty()){
-            throw new IllegalArgumentException("Código obligatorio");
-        }
 
         if (usuario.getUserName() == null || usuario.getUserName().trim().isEmpty()){
             throw new IllegalArgumentException("Usuario obligatorio");

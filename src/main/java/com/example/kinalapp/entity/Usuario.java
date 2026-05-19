@@ -1,34 +1,41 @@
 package com.example.kinalapp.entity;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
+
     @Id
-    @Column (name = "Codigo_Usuario")
-    private String codigoUsuario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Codigo_Usuario")
+    private Long codigoUsuario;
+
     @Column
     private String userName;
+
     @Column
     private String password;
+
     @Column
     private String email;
+
     @Column
     private String rol;
+
     @Column
     private long estado;
 
     @OneToMany(mappedBy = "usuario")
     private List<Venta> ventas;
 
-
-    public Usuario(){
+    public Usuario() {
     }
 
-    public Usuario(String codigoUsuario, String userName, String password, String email, String rol, long estado) {
+    public Usuario(Long codigoUsuario, String userName, String password,
+                   String email, String rol, long estado) {
+
         this.codigoUsuario = codigoUsuario;
         this.userName = userName;
         this.password = password;
@@ -37,11 +44,11 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public String getCodigoUsuario() {
+    public Long getCodigoUsuario() {
         return codigoUsuario;
     }
 
-    public void setCodigoUsuario(String codigoUsuario) {
+    public void setCodigoUsuario(Long codigoUsuario) {
         this.codigoUsuario = codigoUsuario;
     }
 
