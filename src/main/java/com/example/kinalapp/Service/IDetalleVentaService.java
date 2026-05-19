@@ -11,11 +11,11 @@ public interface IDetalleVentaService {
 
     DetalleVenta guardar(DetalleVenta detalleVenta);
 
-    Optional<DetalleVenta> buscarDetallePorCodigo(String codigoDetalleVenta);
+    Optional<DetalleVenta> buscarDetallePorCodigo(long codigoDetalleVenta);
 
-    DetalleVenta actualizar(String codigoDetalleVenta, DetalleVenta detalleVenta);
+    DetalleVenta actualizar(long codigoDetalleVenta, DetalleVenta detalleVenta);
 
-    void eliminar(String codigoDetalleVenta);
+    void eliminar(long codigoDetalleVenta);
 
-    boolean existePorCodigoDetalleVenta(String codigoDetalleVenta);
+    boolean existePorCodigoDetalleVenta(long codigoDetalleVenta);
 }
