@@ -73,4 +73,11 @@ public class DetalleVentaController {
         service.guardar(d);
         return "redirect:/detalle-venta";
     }
+
+    @GetMapping("/eliminar/{codigoDetalleVenta}")
+    public String eliminar(@PathVariable Long codigoDetalleVenta) {
+        service.eliminar(codigoDetalleVenta);
+        return "redirect:/detalle-venta";
+    }
+
 }
