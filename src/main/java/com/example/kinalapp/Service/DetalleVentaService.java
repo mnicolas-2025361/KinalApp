@@ -34,13 +34,24 @@ public class DetalleVentaService implements IDetalleVentaService {
     }
 
     @Override
-    public Optional<DetalleVenta> buscarDetallePorCodigo(String codigoDetalleVenta) {
-        return Optional.empty();
+    @Transactional(readOnly = true)
+    public Optional<DetalleVenta> buscarDetallePorCodigo(long codigoDetalleVenta) {
+        return detalleVentaRepository.findById(codigoDetalleVenta);
     }
 
     @Override
-    public DetalleVenta actualizar(String codigoDetalleVenta, DetalleVenta detalleVenta) {
-        return null;
+    public DetalleVenta actualizar(long codigoDetalleVenta,
+                                   DetalleVenta detalleVenta) {
+
+        if (!detalleVentaRepository.existsById(codigoDetalleVenta)) {
+            throw new RuntimeException("No existe el detalle de venta");
+        }
+
+        detalleVenta.setCodigoDetalleVenta(codigoDetalleVenta);
+
+        validarDetalleVenta(detalleVenta);
+
+        return detalleVentaRepository.save(detalleVenta);
     }
 
     @Override
@@ -49,8 +60,9 @@ public class DetalleVentaService implements IDetalleVentaService {
     }
 
     @Override
-    public boolean existePorCodigoDetalleVenta(String codigoDetalleVenta) {
-        return false;
+    @Transactional(readOnly = true)
+    public boolean existePorCodigoDetalleVenta(long codigoDetalleVenta) {
+        return detalleVentaRepository.existsById(codigoDetalleVenta);
     }
 
     private void validarDetalleVenta(DetalleVenta detalleVenta) {
