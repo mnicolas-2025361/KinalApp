@@ -28,9 +28,12 @@
         <td th:text="${c.estado}"></td>
 
         <td>
-            <a th:href="@{'/clientes/editar/' + ${c.DPICliente}}">Editar</a>
-            <a th:href="@{'/clientes/eliminar/' + ${c.DPICliente}}"
-               onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
+            <a th:href="@{'/clientes/editar/' + ${c.idCliente}}">Editar</a>
+
+            <a th:href="@{'/clientes/eliminar/' + ${c.idCliente}}"
+               onclick="return confirm('¿Eliminar cliente?')">
+                Eliminar
+            </a>
         </td>
     </tr>
 </table>

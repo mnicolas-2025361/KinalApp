@@ -22,7 +22,7 @@ public class ProductoService implements IProductoService {
     @Override
     @Transactional(readOnly = true)
     public List<Producto> listarProductos() {
-        return productoRepository.findAll();
+        return productoRepository.findByEstado(1);
     }
 
     @Override
@@ -84,7 +84,6 @@ public class ProductoService implements IProductoService {
         return productoRepository.existsById(codigoProducto);
     }
 
-    // ✅ VALIDACIÓN MEJORADA
     private void validarProducto(Producto producto) {
 
         if (producto == null) {

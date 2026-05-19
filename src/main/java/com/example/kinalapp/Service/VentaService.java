@@ -22,7 +22,7 @@ public class VentaService implements IVentaService {
     @Override
     @Transactional(readOnly = true)
     public List<Venta> listarVentas() {
-        return ventaRepository.findAll();
+        return ventaRepository.findByEstado(1);
     }
 
     @Override
@@ -56,10 +56,14 @@ public class VentaService implements IVentaService {
 
     @Override
     public void eliminar(Long codigoVenta) {
-        if (!ventaRepository.existsById(codigoVenta)) {
-            throw new IllegalArgumentException("La venta no se encontró por el código: " + codigoVenta);
-        }
-        ventaRepository.deleteById(codigoVenta);
+
+        Venta venta = ventaRepository.findById(codigoVenta)
+                .orElseThrow(() ->
+                        new RuntimeException("Venta no encontrada"));
+
+        venta.setEstado(0);
+
+        ventaRepository.save(venta);
     }
 
     @Override

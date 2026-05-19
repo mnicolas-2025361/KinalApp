@@ -23,6 +23,7 @@ public class DetalleVentaController {
     public DetalleVentaController(IDetalleVentaService service,
                                   IVentaService ventaService,
                                   IProductoService productoService) {
+
         this.service = service;
         this.ventaService = ventaService;
         this.productoService = productoService;
@@ -43,29 +44,40 @@ public class DetalleVentaController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@RequestParam String codigo,
-                          @RequestParam long cantidad,
+    public String guardar(@RequestParam long cantidad,
                           @RequestParam Long ventaId,
                           @RequestParam Long productoId,
                           @RequestParam BigDecimal precio) {
 
         DetalleVenta d = new DetalleVenta();
 
-        d.setCodigoDetalleVenta(codigo);
         d.setCantidad(cantidad);
         d.setPrecioUnitario(precio);
 
-        d.setSubtotal(precio.multiply(BigDecimal.valueOf(cantidad)));
+        d.setSubtotal(
+                precio.multiply(BigDecimal.valueOf(cantidad))
+        );
 
         Venta venta = ventaService.buscarPorCodigoVenta(ventaId)
-                .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
+                .orElseThrow(() ->
+                        new RuntimeException("Venta no encontrada")
+                );
 
         Producto producto = productoService.buscarPorId(productoId)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() ->
+                        new RuntimeException("Producto no encontrado")
+                );
 
         d.setVenta(venta);
         d.setProducto(producto);
         service.guardar(d);
         return "redirect:/detalle-venta";
     }
+
+    @GetMapping("/eliminar/{codigoDetalleVenta}")
+    public String eliminar(@PathVariable Long codigoDetalleVenta) {
+        service.eliminar(codigoDetalleVenta);
+        return "redirect:/detalle-venta";
+    }
+
 }

@@ -5,6 +5,7 @@ import com.example.kinalapp.entity.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -40,12 +41,23 @@ public class UsuarioController {
     public String editar(@PathVariable("id") String id, Model model){
         Usuario usuario = usuarioService.buscarPorCodigoUsuario(id).orElse(null);
         model.addAttribute("usuario", usuario);
-        return "form-usuario";
+        return "form-usuario.html";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable("id") String id){
-        usuarioService.eliminar(id);
+    public String eliminar(@PathVariable("id") String id,
+                           RedirectAttributes redirectAttributes) {
+
+        boolean eliminado = usuarioService.eliminar(id);
+
+        if (!eliminado) {
+            redirectAttributes.addFlashAttribute("error",
+                    "No se puede eliminar el usuario.");
+        } else {
+            redirectAttributes.addFlashAttribute("success",
+                    "Usuario eliminado correctamente.");
+        }
+
         return "redirect:/usuarios";
     }
 }

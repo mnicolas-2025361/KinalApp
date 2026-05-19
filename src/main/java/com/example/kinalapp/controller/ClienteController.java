@@ -34,18 +34,18 @@ public class ClienteController {
         return "redirect:/clientes";
     }
 
-    @GetMapping("/editar/{dpi}")
-    public String editar(@PathVariable String dpi, Model model) {
-        Cliente cliente = clienteService.buscarPorDPI(dpi)
+    @GetMapping("/editar/{idCliente}")
+    public String editar(@PathVariable Long idCliente, Model model) {
+        Cliente cliente = clienteService.buscarPorId(idCliente)
                 .orElse(new Cliente());
 
         model.addAttribute("cliente", cliente);
-        return "cliente/form";
+        return "form-cliente";
     }
 
-    @GetMapping("/eliminar/{dpi}")
-    public String eliminar(@PathVariable String dpi) {
-        clienteService.eliminar(dpi);
+    @GetMapping("/eliminar/{idCliente}")
+    public String eliminar(@PathVariable Long idCliente) {
+        clienteService.eliminar(idCliente);
         return "redirect:/clientes";
     }
 }

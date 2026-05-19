@@ -8,7 +8,7 @@
 
 <h1>DETALLE DE VENTAS</h1>
 
-<a href="/detalles-venta/nuevo">+ Nuevo Detalle</a>
+<a href="/detalle-venta/nuevo">+ Nuevo Detalle</a>
 
 <table>
     <thead>
@@ -26,7 +26,7 @@
     <tr th:each="d : ${detalles}">
         <td th:text="${d.codigoDetalleVenta}"></td>
         <td th:text="${d.venta.codigoVenta}"></td>
-        <td th:text="${d.producto.nombre}"></td>
+        <td th:text="${d.producto.nombreProducto}"></td>
         <td th:text="${d.cantidad}"></td>
         <td th:text="${d.precioUnitario}"></td>
         <td th:text="${d.subtotal}"></td>

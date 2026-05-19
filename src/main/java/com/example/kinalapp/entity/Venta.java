@@ -11,6 +11,7 @@ import java.util.List;
 public class Venta {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long codigoVenta;
 
@@ -74,5 +75,21 @@ public class Venta {
 
     public void setEstado(long estado) {
         this.estado = estado;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

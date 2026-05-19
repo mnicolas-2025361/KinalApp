@@ -1,4 +1,4 @@
-package com.example.kinalapp.security;
+package com.example.kinalapp;
 
 import com.example.kinalapp.entity.Usuario;
 import com.example.kinalapp.repositry.UsuarioRepository;

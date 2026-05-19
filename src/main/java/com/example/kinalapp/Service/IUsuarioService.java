@@ -16,7 +16,7 @@ public interface IUsuarioService {
 
     Usuario actualizar(String codigoUsuario, Usuario usuario);
 
-    void eliminar(String codigoUsuario);
+    boolean eliminar(String codigoUsuario);
 
     boolean existePorCodigoUsuario(String codigoUsuario);
 

@@ -1,63 +1,116 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     background: linear-gradient(135deg, #ff0000, #0004ff);
-}
+    background-attachment: fixed;
 
-.container {
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-button {
-    background: #4CAF50;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
     color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-button:hover {
-    opacity: 0.9;
+/* TITULO */
+h1 {
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+/* BOTON NUEVO */
+a[href*="/nuevo"] {
+    text-decoration: none;
+    background: #27ae60;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    align-self: flex-start;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
+a[href*="/nuevo"]:hover {
+    background: #2ecc71;
+    transform: scale(1.05);
+}
+
+/* TABLA */
 table {
     width: 100%;
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
+/* CABECERA */
 th {
-    background: #2c3e50;
-    color: white;
-    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #00d4ff;
+    padding: 18px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-align: left;
 }
 
+/* CELDAS */
 td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 18px;
+    font-size: 1rem;
+}
+
+/* FILAS */
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03);
 }
 
 tr:hover {
-    background: #f1f1f1;
+    background: rgba(255, 255, 255, 0.08);
 }
 
-td button {
-    margin: 2px;
+/* BOTONES */
+td a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-right: 5px;
+    display: inline-block;
+    transition: all 0.2s;
 }
 
-.btn-edit {
-    background: #3498db;
+/* EDITAR */
+td a[href*="editar"] {
+    background: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+
+    border: 1px solid #f1c40f;
 }
 
-.btn-delete {
+td a[href*="editar"]:hover {
+    background: #f1c40f;
+    color: black;
+}
+
+/* ELIMINAR */
+td a[href*="eliminar"] {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+td a[href*="eliminar"]:hover {
     background: #e74c3c;
+    color: white;
 }

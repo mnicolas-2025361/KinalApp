@@ -6,19 +6,28 @@ import java.util.List;
 
 @Entity
 @Table(name = "clientes")
+
 public class Cliente {
+
     @Id
-    @Column (name= "dpi_cliente")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
+    private Long idCliente;
+
+    @Column(name = "dpi_cliente")
     private String DPICliente;
+
     @Column
     private String nombreCliente;
+
     @Column
     private String apellidoCliente;
+
     @Column
     private String direccion;
+
     @Column
     private int estado;
-
 
     @OneToMany(mappedBy = "cliente")
     private List<Venta> ventas;
@@ -32,6 +41,14 @@ public class Cliente {
         this.direccion = direccion;
         this.apellidoCliente = apellidoCliente;
         this.nombreCliente = nombreCliente;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getDPICliente() {
@@ -72,5 +89,13 @@ public class Cliente {
 
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 }
