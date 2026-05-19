@@ -44,8 +44,8 @@ public class DetalleVentaService implements IDetalleVentaService {
     }
 
     @Override
-    public void eliminar(String codigoDetalleVenta) {
-
+    public void eliminar(long codigoDetalleVenta) {
+        detalleVentaRepository.deleteById(codigoDetalleVenta);
     }
 
     @Override
