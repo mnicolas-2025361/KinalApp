@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio Usuario</title>
+    <link rel="stylesheet" th:href="@{/home-usuario.css}">
+</head>
+<body>
+
+<h1>ÚLTIMAS VENTAS</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Fecha</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="v : ${ventas}"
+        th:if="${v.codigoVenta != null and v.total != null}">
+
+        <td th:text="${v.codigoVenta}"></td>
+        <td th:text="${v.fechaVenta}"></td>
+        <td th:text="${v.total}"></td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
